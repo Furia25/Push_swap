@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+         #
+#    By: val <val@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/13 23:20:17 by val               #+#    #+#              #
-#    Updated: 2025/01/14 14:21:17 by vdurand          ###   ########.fr        #
+#    Updated: 2025/02/10 23:49:02 by val              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,28 +17,26 @@ BLUE = \033[34m
 RESET = \033[0m
 BG_GREEN = \033[42m
 
-NAME = fdf
+NAME = pipex
 
 SRC_DIR = src
+MAIN_DIR = src_main
 OBJ_DIR = obj
 INC_DIR = includes
-LIBFT_DIR = libs/libft
-MLX_DIR = libs/minilibx-linux
+LIBFT_DIR = libft
 
 SRC = $(shell find $(SRC_DIR) -type f -name "*.c")
 OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 CC = gcc
-OPTIFLAGS = -O3
-CFLAGS = $(OPTIFLAGS) -Werror -Wextra -Wall
-MLXFLAGS = -L$(MLX_DIR) -lmlx
+CFLAGS = -Werror -Wextra -Wall
 FTFLAGS = -L$(LIBFT_DIR) -lft
-LDFLAGS = -lXext -lm -lX11 $(MLXFLAGS) $(FTFLAGS)
-INCLUDES = -I$(MLX_DIR) -I$(INC_DIR) -I$(LIBFT_DIR)
+LDFLAGS = $(FTFLAGS)
+INCLUDES = -I$(INC_DIR) -I$(LIBFT_DIR)
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT_DIR)/libft.a $(MLX_DIR)/libmlx.a
+$(NAME): $(OBJ) $(LIBFT_DIR)/libft.a
 	@$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	@echo "$(BG_GREEN)>>> Program $(NAME) compiled!$(RESET)"
 
@@ -56,14 +54,8 @@ $(LIBFT_DIR)/libft.a:
 	@$(MAKE) bonus -C $(LIBFT_DIR) > /dev/null 2>&1
 	@echo "$(GREEN)>>> Compilation achieved!$(RESET)"
 
-$(MLX_DIR)/libmlx.a:
-	@echo "$(BLUE)>>> Configuration of MiniLibX...$(RESET)"
-	@cd $(MLX_DIR) && bash configure > /dev/null 2>&1
-	@echo "$(GREEN)>>> Configuration achieved!$(RESET)"
-
 cleanlibs:
 	@echo "$(YELLOW)>>> Cleaning libs...$(RESET)"
-	@cd $(MLX_DIR)  && bash configure clean > /dev/null 2>&1
 	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null 2>&1
 
 clean:
