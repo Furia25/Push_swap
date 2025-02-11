@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   stack.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 23:49:17 by val               #+#    #+#             */
-/*   Updated: 2025/02/11 16:13:40 by val              ###   ########.fr       */
+/*   Created: 2025/02/11 16:15:27 by val               #+#    #+#             */
+/*   Updated: 2025/02/11 19:23:29 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef STACK_H
+# define STACK_H
+# include "libft.h"
 
-void	lst_print(void *content)
+typedef struct s_stack
 {
-	ft_printf((char *)content);
-}
+	int	*array;
+	int	size;
+	int	top;
+	int	bottom;
+}		t_stack;
 
-int	main(int argc, char **argv)
-{
-	t_list	*instructions;
-
-	if (argc != 0)
-		return (EXIT_FAILURE);
-	ft_printf(argv[0]);
-	instructions = ft_lstnew(NULL);
-	if (!instructions)
-		return (EXIT_FAILURE);
-	ft_lstiter(instructions, lst_print);
-	ft_lstclear(&instructions, free);
-}
+#endif

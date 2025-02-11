@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   stack_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/10 23:49:17 by val               #+#    #+#             */
-/*   Updated: 2025/02/11 16:13:40 by val              ###   ########.fr       */
+/*   Created: 2025/02/11 16:27:50 by val               #+#    #+#             */
+/*   Updated: 2025/02/11 16:33:27 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "stack.h"
 
-void	lst_print(void *content)
+t_stack	*stack_new(int capacity)
 {
-	ft_printf((char *)content);
-}
+	t_stack	*result;
 
-int	main(int argc, char **argv)
-{
-	t_list	*instructions;
-
-	if (argc != 0)
-		return (EXIT_FAILURE);
-	ft_printf(argv[0]);
-	instructions = ft_lstnew(NULL);
-	if (!instructions)
-		return (EXIT_FAILURE);
-	ft_lstiter(instructions, lst_print);
-	ft_lstclear(&instructions, free);
+	result = ft_calloc(1, sizeof(t_stack));
+	if (!result)
+		return (NULL);
+	result->array = ft_calloc(capacity, sizeof(int));
+	if (result->array)
+		return (free(result), NULL);
+	result->bottom = -1;
+	result->top = -1;
+	result->size = capacity;
 }
