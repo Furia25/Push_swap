@@ -1,4 +1,4 @@
-# 🌐 FDF - Wireframe
+# 🌐 Push swap
 
 ## 📋 Table of Contents
 

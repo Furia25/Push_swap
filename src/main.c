@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:49:17 by val               #+#    #+#             */
-/*   Updated: 2025/02/11 22:56:21 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 00:34:09 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,22 +30,44 @@ void	free_data(t_data *data)
 	free(data);
 }
 
+static t_data	*init_data(int capacity)
+{
+	t_data	*data;
+
+	data = ft_calloc(1, sizeof(t_data));
+	if (!data)
+		return (NULL);
+	data->write_mode = FALSE;
+	data->instructions = ft_lstnew(NULL);
+	if (data->instructions)
+		return (free_data(data), NULL);
+	if (stack_init(&data->stack_a, capacity))
+		return (free_data(data), NULL);
+	if (stack_init(&data->stack_b, capacity))
+		return (free_data(data), NULL);
+	return (data);
+}
+
+void	parse_argv(t_data data, char **argv, size_t argc)
+{
+	size_t	index;
+
+	index = 0;
+	while (index < argc)
+	{
+		index++;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	*data;
 
 	if (argc > 1)
 		return (EXIT_FAILURE);
-	data = ft_calloc(1, sizeof(t_data));
+	data = init_data(argc - 1);
 	if (!data)
 		return (EXIT_FAILURE);
-	data->instructions = ft_lstnew(NULL);
-	if (data->instructions)
-		return (free_data(data), EXIT_FAILURE);
-	if (stack_init(&data->stack_a, argc - 1))
-		return (free_data(data), EXIT_FAILURE);
-	if (stack_init(&data->stack_b, argc - 1))
-		return (free_data(data), EXIT_FAILURE);
 	free_data(data);
 	return(EXIT_SUCCESS);
 }

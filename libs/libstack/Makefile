@@ -6,7 +6,7 @@
 #    By: val <val@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/15 21:41:19 by val               #+#    #+#              #
-#    Updated: 2025/02/11 21:54:32 by val              ###   ########.fr        #
+#    Updated: 2025/02/11 23:51:52 by val              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CFLAGS = -Wall -Wextra -Werror
 CC = gcc
 NAME = libstack.a
 
-BASE_SRC = stack_init.c \
+BASE_SRC = stack_init.c stack_methods.c
 
 ALL_OBJS = $(BASE_SRC:.c=.o)
 

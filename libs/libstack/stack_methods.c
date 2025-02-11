@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:27:50 by val               #+#    #+#             */
-/*   Updated: 2025/02/11 23:31:24 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 00:32:32 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ int	stack_swap(t_stack *stack)
 
 int	stack_rotate(t_stack *stack)
 {
-	int	temp;
-	int	index;
+	int		temp;
+	size_t	index;
 
 	if (stack->top < 1)
 		return (0);
@@ -53,8 +53,8 @@ int	stack_rotate(t_stack *stack)
 
 int	stack_rrotate(t_stack *stack)
 {
-	int	temp;
-	int	index;
+	int		temp;
+	size_t	index;
 
 	if (stack->top < 1)
 		return (0);
@@ -67,4 +67,15 @@ int	stack_rrotate(t_stack *stack)
 	}
 	stack->array[stack->top] = temp;
 	return (1);
+}
+
+int	*stack_pop(t_stack *stack)
+{
+	int	temp;
+
+	if (stack->top < 0)
+		return (NULL);
+	temp = &stack->array[stack->top];
+	stack->top--;
+	return (temp);
 }
