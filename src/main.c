@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:49:17 by val               #+#    #+#             */
-/*   Updated: 2025/02/11 16:13:40 by val              ###   ########.fr       */
+/*   Updated: 2025/02/11 21:35:05 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	ft_lstiter(instructions, lst_print);
 	ft_lstclear(&instructions, free);
+	return(EXIT_SUCCESS);
 }

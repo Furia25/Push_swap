@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:01:51 by val               #+#    #+#             */
-/*   Updated: 2025/02/11 19:24:17 by val              ###   ########.fr       */
+/*   Updated: 2025/02/11 19:50:48 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ typedef struct s_data
 	t_stack	stack_a;
 	t_stack	stack_b;
 	t_list	instructions;
-}		t_data
+}		t_data;
 
 #endif

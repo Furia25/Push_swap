@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:27:50 by val               #+#    #+#             */
-/*   Updated: 2025/02/11 16:33:27 by val              ###   ########.fr       */
+/*   Updated: 2025/02/11 21:26:16 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ t_stack	*stack_new(int capacity)
 	result->bottom = -1;
 	result->top = -1;
 	result->size = capacity;
+	return (result);
 }
