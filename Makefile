@@ -6,7 +6,7 @@
 #    By: val <val@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/13 23:20:17 by val               #+#    #+#              #
-#    Updated: 2025/02/11 22:02:24 by val              ###   ########.fr        #
+#    Updated: 2025/02/11 22:18:56 by val              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,48 +71,34 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c Makefile $(INC_DIR)/*.h | $(OBJ_DIR)
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJ_DIR):
-	@echo "$(YELLOW)>>> Directory '$(OBJ_DIR)' created!$(RESET)"
+	@echo "$(DIM)$(MAGENTA)>>> Directory '$(OBJ_DIR)' created!$(RESET)"
 	@mkdir -p $(OBJ_DIR)
 
-$(LIBS): compile_libs
+$(LIBS): %.a:
+	@echo "$(MAGENTA)>>> Compiling library $(notdir $@)...$(RESET)"
+	@$(MAKE) -C $(dir $@) > /dev/null 2>&1
+	@if $(MAKE) -C $(dir $@) -n bonus > /dev/null 2>&1; then \
+		echo "$(DIM)$(MAGENTA)>>> Bonus rule exists, compiling with bonus...$(RESET)"; \
+		$(MAKE) -C $(dir $@) bonus > /dev/null 2>&1; \
+	fi
+	@echo "$(BG_BLUE)$(GREEN)>>> Compilation of $(notdir $@) completed!$(RESET)"
 
-compile_libs:
-	@echo "$(YELLOW)>>> Compiling libraries...$(RESET)"
-	@for dir in $(LIBS_DIRS); do \
-		lib_name=$$(basename $$dir); \
-		if [ -f $$dir/Makefile ]; then \
-			if [ ! -f $$dir/$$lib_name.a ]; then \
-				$(MAKE) -C $$dir > /dev/null 2>&1; \
-				if $(MAKE) -C $$dir -n bonus > /dev/null 2>&1; then \
-					echo "$(DIM)$(YELLOW)>>> Bonus rule exists, compiling with bonus...$(RESET)"; \
-					$(MAKE) -C $$dir bonus > /dev/null 2>&1; \
-				fi; \
-				echo "$(BG_BLUE)$(GREEN)>>> Compilation of $$lib_name completed!$(RESET)"; \
-			else \
-				echo "$(DIM)$(BLACK)>>> $$lib_name.a exists, skipping...$(RESET)"; \
-			fi; \
-		else \
-			echo "$(DIM)$(RED)>>> No Makefile found in $$dir, skipping...$(RESET)"; \
-		fi; \
-	done
-
-cleanlibs:
+fcleanlibs:
 	@for dir in $(LIBS_DIRS); do \
 		if [ -f $$dir/Makefile ]; then \
 			$(MAKE) -C $$dir fclean > /dev/null 2>&1; \
-			echo "$(GREEN)>>> Cleaned in $$dir$(RESET)"; \
+			echo "$(GREEN)>>> Cleaned all in $$dir$(RESET)"; \
 		fi \
 	done
 
 clean:
 	@echo "$(YELLOW)>>> Cleaning objects$(RESET)"
 	@rm -rf $(OBJ_DIR) > /dev/null 2>&1
-	@echo "$(YELLOW)>>> Cleaning libraries...$(RESET)"
 
-fclean: clean cleanlibs
+fclean: clean fcleanlibs
 	@echo "$(YELLOW)>>> Cleaning executable...$(RESET)"
 	@rm -f $(NAME) > /dev/null 2>&1
 
 re: fclean all
 
-.PHONY: all cleanlibs clean fclean re compile_libs test
+.PHONY: all fcleanlibs clean fclean re compile_libs
