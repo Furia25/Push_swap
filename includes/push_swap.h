@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:01:51 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 01:55:14 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 18:28:17 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@
 # define RROTATE_B	"rrb"
 # define RROTATE_AB	"rrr"
 
+typedef enum e_pos
+{
+	TOP_A,
+	BOT_A,
+	TOP_B,
+	BOT_B
+}		t_pos;
+
 typedef struct s_data
 {
 	t_bool	write_mode;
@@ -44,12 +52,26 @@ typedef struct s_data
 	t_list	*instructions;
 }		t_data;
 
+typedef struct s_chunk
+{
+	t_pos	POSITION;
+	int		size;
+}		t_chunk;
+
+typedef struct s_qchunks
+{
+	t_chunk	max;
+	t_chunk	mid;
+	t_chunk	min;
+}		t_qchunks;
+
 /*Utils - utils.c*/
 
 int		add_instruction(t_data *data, char *instruction);
 void	free_data(t_data *data);
 void	check_atoi(int *check, int *number, const char *nptr);
 void	print_error(void);
+void	lst_print(void *content);
 /*************** */
 
 /*Stacks Instructions - ins_pushs_swaps.c*/
@@ -75,4 +97,10 @@ int		rotate_b(t_data *data);
 int		rotate_ab(t_data *data);
 /************************************/
 
+/*Sort - sort.c*/
+
+int		sort(t_data *data);
+void	sort_three_a(t_data *data);
+void	sort_fourfive_a(t_data *data);
+/***************/
 #endif

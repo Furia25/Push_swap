@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 13:04:11 by vdurand           #+#    #+#             */
-/*   Updated: 2025/02/12 17:50:54 by val              ###   ########.fr       */
+/*   Created: 2025/02/12 15:47:03 by val               #+#    #+#             */
+/*   Updated: 2025/02/12 18:28:24 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "push_swap.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+int	sort(t_data *data)
 {
-	if (!lst || !(*lst))
-		return ;
-	if ((*lst)->next)
-		ft_lstclear((&(*lst)->next), del);
-	if (del)
-		(*del)((*lst)->content);
-	free(*lst);
-	*lst = NULL;
+	data->write_mode = TRUE;
+	if (data->stack_a.top == 2)
+		return (sort_three_a(data), 1);
+	if (data->stack_a.top == 1)
+		if (data->stack_a.array[0] < data->stack_a.array[1])
+			return (swap_a(data), 1);
+	if (data->stack_a.top == 3 || data->stack_a.top == 4)
+		return (sort_fourfive_a(data), 1);
+	return (1);
 }

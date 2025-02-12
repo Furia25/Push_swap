@@ -6,16 +6,11 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:49:17 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 02:30:31 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 17:54:45 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	lst_print(void *content)
-{
-	ft_printf((char *)content);
-}
 
 void	free_data(t_data *data)
 {
@@ -26,7 +21,7 @@ void	free_data(t_data *data)
 	if (data->stack_b.array)
 		free(data->stack_b.array);
 	if (data->instructions)
-		ft_lstclear(&data->instructions, free);
+		ft_lstclear(&data->instructions, NULL);
 	free(data);
 }
 
@@ -50,7 +45,27 @@ static t_data	*init_data(int capacity)
 
 int	simplify_stack(t_stack *stack)
 {
-	
+	int		*temp;
+	int		index;
+	int		j;
+
+	temp = malloc(stack->size * sizeof(int));
+	if (!temp)
+		return (0);
+	ft_memcpy((void *)temp, (void *)stack->array, stack->size * sizeof(int));
+	ft_quicksort(temp, 0, stack->top);
+	index = 0;
+	while (index <= stack->top)
+	{
+		j = 0;
+		while (j <= stack->top && stack->array[index] != temp[j])
+			j++;
+		if (j <= stack->top)
+			stack->array[index] = j + 1;
+		index++;
+	}
+	free(temp);
+	return (1);
 }
 
 int	parse_argv(t_data *data, char **argv, size_t argc)
@@ -92,7 +107,13 @@ int	main(int argc, char **argv)
 		return (free_data(data), print_error(), EXIT_FAILURE);
 	if (!parse_argv(data, argv, argc))
 		return (free_data(data), print_error(), EXIT_FAILURE);
+	data->write_mode = TRUE;
+	if (stack_is_sorted(&data->stack_a))
+		return (free_data(data), EXIT_SUCCESS);
+	if (!sort(data))
+		return (free_data(data), print_error(), EXIT_FAILURE);
 	stack_print(&data->stack_a);
+	ft_lstiter(data->instructions->next, lst_print);
 	free_data(data);
 	return (EXIT_SUCCESS);
 }

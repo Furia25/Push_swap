@@ -6,7 +6,7 @@
 #    By: val <val@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/15 21:41:19 by val               #+#    #+#              #
-#    Updated: 2025/01/15 21:43:33 by val              ###   ########.fr        #
+#    Updated: 2025/02/12 14:55:21 by val              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,8 @@ BASE_SRC = ft_isalpha.c \
 		ft_putnbr_base_fd.c \
 		ft_printf.c \
 		get_next_line.c \
-		ft_strend.c
+		ft_strend.c \
+		ft_quicksort.c
 
 BONUS_SRC = ft_lstadd_back_bonus.c \
 			ft_lstadd_front_bonus.c \

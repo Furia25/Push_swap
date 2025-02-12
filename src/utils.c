@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:04:42 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 01:59:58 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 15:38:59 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	check_atoi(int *check, int *number, const char *nptr)
 	index = 0;
 	numbers_count = 0;
 	result = 0;
-	sign = 1;
+	sign = -1;
 	*check = 1;
 	if (nptr[index] == '-')
 	{
@@ -51,9 +51,8 @@ void	check_atoi(int *check, int *number, const char *nptr)
 		numbers_count++;
 		index++;
 	}
-	if (result > (long long) INT_MAX || result * sign < (long long) INT_MIN)
-		*check = 0;
-	if (numbers_count == 0)
+	if (result > (long long) INT_MAX || result * sign < (long long) INT_MIN || \
+		numbers_count == 0)
 		*check = 0;
 	*number = result * sign;
 }
@@ -61,4 +60,9 @@ void	check_atoi(int *check, int *number, const char *nptr)
 void	print_error(void)
 {
 	ft_putstr_fd(ERROR_MESSAGE, 2);
+}
+
+void	lst_print(void *content)
+{
+	ft_printf("%s\n", (char *)content);
 }

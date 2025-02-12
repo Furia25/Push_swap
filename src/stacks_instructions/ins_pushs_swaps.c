@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:37:26 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 01:02:19 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 15:30:48 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	push_a(t_data *data)
 {
 	int	*temp;
-	
+
 	add_instruction(data, PUSH_A);
 	temp = stack_pop(&data->stack_b);
 	if (!temp)
@@ -27,7 +27,7 @@ int	push_a(t_data *data)
 int	push_b(t_data *data)
 {
 	int	*temp;
-	
+
 	add_instruction(data, PUSH_B);
 	temp = stack_pop(&data->stack_a);
 	if (!temp)

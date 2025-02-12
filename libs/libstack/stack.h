@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:15:27 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 01:51:53 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 17:05:21 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ typedef struct s_stack
 
 	/*stack_utils.c*/
 t_stack		*stack_new(size_t capacity);
+int			stack_is_sorted(t_stack *stack);
 int			stack_init(t_stack *stack, size_t capacity);
 void		stack_free(t_stack *stack);
 void		stack_print(t_stack *stack);
+
 	/*stack_methods.c*/
 int			stack_push(t_stack *stack, int value);
 int			stack_swap(t_stack *stack);

@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 15:39:28 by vdurand           #+#    #+#             */
-/*   Updated: 2025/02/11 23:41:27 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 14:54:40 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,20 @@ char	*ft_strdup(const char *s);
 char	*get_next_line(int fd);
 char	*ft_itoa(int n);
 //
+
 void	ft_striteri(char *s, void (*f)(size_t, char *));
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstadd_front(t_list **lst, t_list *new);
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_quicksort(int arr[], int low, int high);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_bzero(void *s, size_t n);
+void	ft_swap(int *a, int *b);
 //
 void	*ft_calloc(size_t elementCount, size_t elementSize);
 void	*ft_memcpy(void *dest, const void *src, size_t n);

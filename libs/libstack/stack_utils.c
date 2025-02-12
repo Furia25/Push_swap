@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:27:50 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 02:17:27 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 17:08:31 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,25 @@ void	stack_print(t_stack *stack)
 	int	index;
 
 	index = stack->top;
-	ft_putchar_fd('\n', 1);
 	while (index >= 0)
 	{
 		ft_printf("|%d|\n", stack->array[index]);
 		index--;
 	}
+}
+
+int	stack_is_sorted(t_stack *stack)
+{
+	int	index;
+
+	if (stack->top <= 0)
+		return (1);
+	index = stack->top;
+	while (index > 0)
+	{
+		if (stack->array[index] > stack->array[index - 1])
+			return (0);
+		index--;
+	}
+	return (1);
 }
