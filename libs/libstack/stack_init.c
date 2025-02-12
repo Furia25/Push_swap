@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:27:50 by val               #+#    #+#             */
-/*   Updated: 2025/02/11 23:06:57 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 01:14:22 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_stack	*stack_new(int capacity)
 	result = ft_calloc(1, sizeof(t_stack));
 	if (!result)
 		return (NULL);
-	if (!init_stack(result, capacity))
+	if (!stack_init(result, capacity))
 	{
 		free(result);
 		return(NULL);

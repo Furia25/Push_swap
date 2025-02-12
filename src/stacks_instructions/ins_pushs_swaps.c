@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pushs_swaps.c                                      :+:      :+:    :+:   */
+/*   ins_pushs_swaps.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:37:26 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 00:14:17 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 01:02:19 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	push_a(t_data *data)
 	if (!temp)
 		return (0);
 	stack_push(&data->stack_a, *temp);
+	return (1);
 }
 
 int	push_b(t_data *data)
@@ -32,18 +33,21 @@ int	push_b(t_data *data)
 	if (!temp)
 		return (0);
 	stack_push(&data->stack_b, *temp);
+	return (1);
 }
 
 int	swap_a(t_data *data)
 {
 	add_instruction(data, SWAP_A);
 	stack_swap(&data->stack_a);
+	return (1);
 }
 
 int	swap_b(t_data *data)
 {
 	add_instruction(data, SWAP_B);
 	stack_swap(&data->stack_b);
+	return (1);
 }
 
 int	swap_ab(t_data *data)
@@ -51,4 +55,5 @@ int	swap_ab(t_data *data)
 	add_instruction(data, SWAP_AB);
 	stack_swap(&data->stack_a);
 	stack_swap(&data->stack_b);
+	return (1);
 }

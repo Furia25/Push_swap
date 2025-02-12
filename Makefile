@@ -6,7 +6,7 @@
 #    By: val <val@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/13 23:20:17 by val               #+#    #+#              #
-#    Updated: 2025/02/11 22:18:56 by val              ###   ########.fr        #
+#    Updated: 2025/02/12 01:24:23 by val              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ INC_DIR = includes
 LIBS_DIR = libs
 
 SRC = $(shell find $(SRC_DIR) -type f -name "*.c")
-OBJ = $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
+OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 LIBS_DIRS = $(shell find $(LIBS_DIR) -mindepth 1 -type d)
 LIBS = $(foreach dir, $(LIBS_DIRS), $(dir)/$(notdir $(dir)).a)
 
@@ -66,20 +66,33 @@ $(NAME): $(OBJ) $(LIBS)
 	@$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	@echo "$(BG_GREEN)>>> Program $(NAME) compiled!$(RESET)"
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c Makefile $(INC_DIR)/*.h | $(OBJ_DIR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c Makefile $(INC_DIR)/*.h
+	@mkdir -p $(dir $@)
 	@echo "$(BLUE)>>> Compiling $<...$(RESET)"
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-$(OBJ_DIR):
-	@echo "$(DIM)$(MAGENTA)>>> Directory '$(OBJ_DIR)' created!$(RESET)"
-	@mkdir -p $(OBJ_DIR)
-
 $(LIBS): %.a:
 	@echo "$(MAGENTA)>>> Compiling library $(notdir $@)...$(RESET)"
-	@$(MAKE) -C $(dir $@) > /dev/null 2>&1
+	@$(MAKE) -C $(dir $@) > /dev/null 2> make_errors.log; \
+	if [ $$? -ne 0 ]; then \
+		echo "$(RED)>>> Error while compiling $(notdir $@):$(RESET)"; \
+		cat make_errors.log; \
+		rm -f make_errors.log; \
+		echo "$(RED)>>> Error -----------------------------$(RESET)"; \
+		exit 1; \
+	fi; \
+	rm -f make_errors.log
 	@if $(MAKE) -C $(dir $@) -n bonus > /dev/null 2>&1; then \
 		echo "$(DIM)$(MAGENTA)>>> Bonus rule exists, compiling with bonus...$(RESET)"; \
-		$(MAKE) -C $(dir $@) bonus > /dev/null 2>&1; \
+		$(MAKE) -C $(dir $@) bonus > /dev/null 2> make_errors.log; \
+		if [ $$? -ne 0 ]; then \
+			echo "$(RED)>>> Error while compiling bonus for $(notdir $@):$(RESET)"; \
+			cat make_errors.log; \
+			rm -f make_errors.log; \
+			echo "$(RED)>>> Error -----------------------------$(RESET)"; \
+			exit 1; \
+		fi; \
+		rm -f make_errors.log; \
 	fi
 	@echo "$(BG_BLUE)$(GREEN)>>> Compilation of $(notdir $@) completed!$(RESET)"
 

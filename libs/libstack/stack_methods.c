@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:27:50 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 00:32:32 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 01:11:09 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	stack_rrotate(t_stack *stack)
 		return (0);
 	temp = stack->array[0];
 	index = 0;
-	while (index < stack->top)
+	while (index < (size_t) stack->top)
 	{
 		stack->array[index] = stack->array[index + 1];
 		index++;
@@ -71,7 +71,7 @@ int	stack_rrotate(t_stack *stack)
 
 int	*stack_pop(t_stack *stack)
 {
-	int	temp;
+	int	*temp;
 
 	if (stack->top < 0)
 		return (NULL);
