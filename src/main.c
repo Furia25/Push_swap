@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:49:17 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 02:03:38 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 02:30:31 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,17 @@ static t_data	*init_data(int capacity)
 	return (data);
 }
 
+int	simplify_stack(t_stack *stack)
+{
+	
+}
+
 int	parse_argv(t_data *data, char **argv, size_t argc)
 {
 	int		check;
 	int		number;
 	size_t	index;
+	int		j;
 
 	index = argc - 1;
 	while (index > 0)
@@ -61,8 +67,17 @@ int	parse_argv(t_data *data, char **argv, size_t argc)
 		if (!check)
 			return (0);
 		stack_push(&data->stack_a, number);
+		j = data->stack_a.top - 1;
+		while (j >= 0)
+		{
+			if (data->stack_a.array[j] == number)
+				return (0);
+			j--;
+		}
 		index--;
 	}
+	if (!simplify_stack(&data->stack_a))
+		return (0);
 	return (1);
 }
 
@@ -70,8 +85,8 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
-	if (argc < 1)
-		return (EXIT_FAILURE);
+	if (argc < 2)
+		return (print_error(), EXIT_FAILURE);
 	data = init_data(argc - 1);
 	if (!data)
 		return (free_data(data), print_error(), EXIT_FAILURE);
