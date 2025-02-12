@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:04:42 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 01:26:12 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 01:59:58 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void	check_atoi(int *check, int *number, const char *nptr)
 	sign = 1;
 	*check = 1;
 	if (nptr[index] == '-')
+	{
 		sign *= -1;
-	index++;
+		index++;
+	}
 	while (nptr[index] && nptr[index] >= '0' && nptr[index] <= '9')
 	{
 		result = result * 10 + (nptr[index] - '0');

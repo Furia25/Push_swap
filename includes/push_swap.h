@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:01:51 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 01:01:46 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 01:55:14 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stddef.h>
 # include <limits.h>
 
-# define ERROR_MESSAGE "Error/n"
+# define ERROR_MESSAGE "Error\n"
 //
 # define PUSH_A		"pa"
 # define PUSH_B		"pb"
@@ -49,6 +49,7 @@ typedef struct s_data
 int		add_instruction(t_data *data, char *instruction);
 void	free_data(t_data *data);
 void	check_atoi(int *check, int *number, const char *nptr);
+void	print_error(void);
 /*************** */
 
 /*Stacks Instructions - ins_pushs_swaps.c*/

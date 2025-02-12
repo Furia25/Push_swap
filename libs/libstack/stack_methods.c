@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:27:50 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 01:11:09 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 01:53:07 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	stack_push(t_stack *stack, int value)
 {
-	if (stack->top == stack->size - 1)
+	if (stack->top != -1 && (size_t) stack->top == stack->size - 1)
 		return (0);
 	stack->top++;
 	stack->array[stack->top] = value;

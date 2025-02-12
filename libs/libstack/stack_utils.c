@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack_init.c                                       :+:      :+:    :+:   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:27:50 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 01:14:22 by val              ###   ########.fr       */
+/*   Updated: 2025/02/12 02:02:44 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "stack.h"
 
-t_stack	*stack_new(int capacity)
+t_stack	*stack_new(size_t capacity)
 {
 	t_stack	*result;
 
@@ -27,10 +27,10 @@ t_stack	*stack_new(int capacity)
 	return (result);
 }
 
-int	stack_init(t_stack *stack, int capacity)
+int	stack_init(t_stack *stack, size_t capacity)
 {
 	stack->array = ft_calloc(capacity, sizeof(int));
-	if (stack->array)
+	if (!stack->array)
 		return (0);
 	stack->bottom = 0;
 	stack->top = -1;
@@ -45,4 +45,16 @@ void	stack_free(t_stack *stack)
 	if (stack->array)
 		free(stack->array);
 	free(stack);
+}
+
+void	stack_print(t_stack *stack)
+{
+	int	index;
+
+	index = stack->top;
+	while (index >= 0)
+	{
+		ft_printf("\n|%d|\n", stack->array[index]);
+		index--;
+	}
 }
