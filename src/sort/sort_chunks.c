@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   sort_chunks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/12 15:47:03 by val               #+#    #+#             */
-/*   Updated: 2025/02/13 17:31:46 by vdurand          ###   ########.fr       */
+/*   Created: 2025/02/13 16:39:40 by vdurand           #+#    #+#             */
+/*   Updated: 2025/02/13 16:47:59 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	sort(t_data *data)
+void	sort_chunk_init(t_data *data)
 {
-	data->write_mode = TRUE;
-	if (data->stack_a.top == 2)
-		return (sort_three_a(data), 1);
-	if (data->stack_a.top == 1)
-		if (data->stack_a.array[0] < data->stack_a.array[1])
-			return (swap_a(data), 1);
-	if (data->stack_a.top == 3 || data->stack_a.top == 4)
-		return (sort_fourfive_a(data), 1);
-	return (1);
+	t_chunk	base_chunk;
+
+	base_chunk.POSITION = TOP_A;
+	base_chunk.size = data->stack_a.size;
+	sort_chunk_rec(base_chunk, data);
+}
+
+void	sort_chunk_rec(t_chunk chunk, t_data *data)
+{
+	t_qchunks	splitted;
+
+	if (chunk.size <= 3)
+	{
+		//sort
+		return ;
+	}
+	chunk_split(&splitted, data);
+	sort_chunk_rec(splitted.max, data);
+	sort_chunk_rec(splitted.mid, data);
+	sort_chunk_rec(splitted.min, data);
 }
