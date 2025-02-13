@@ -3,74 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   chunks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+        */
+/*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:51:23 by vdurand           #+#    #+#             */
-/*   Updated: 2025/02/13 17:30:57 by vdurand          ###   ########.fr       */
+/*   Updated: 2025/02/14 00:28:14 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	chunk_split(t_chunk *chunk, t_qchunks *qchunks, t_data *s_data)
+int	chunk_get(t_chunk *chunk, int n, t_data *data)
 {
-	int	pivot1;
-	int	pivot2;
-
-	qchunks->min.size = 0;
-	qchunks->mid.size = 0;
-	qchunks->max.size = 0;
-	qchunks_set_positions(chunk->POSITION, qchunks);
+	t_stack	*stack;
+	int		index;
+	int		direction;
 	
+	if (n > chunk->size && chunk->size > 1)
+		return (chunk_get(chunk, n - chunk->size, data));
+	direction = position_is_top(chunk->position);
+	stack = position_to_stack(data, chunk->position);
+	if (direction)
+		index = stack->top;
+	else
+		index = stack->bottom;
+	if (direction)
+		while (--n > 0)
+			index--;
+	else
+		while (--n > 0)
+			index++;
+	return (stack->array[index]);
 }
 
-void	set_third_pivots(t_pos pos, int crt_size, int *pivot_1, int *pivot_2)
+int	chunk_get_max(t_chunk *chunk, t_data *data)
 {
-	*pivot_2 = crt_size / 3;
-	if (pos == TOP_A || pos == BOT_A)
-		*pivot_1 = 2 * crt_size / 3;
-	if (pos == TOP_B || pos == BOT_B)
-		*pivot_1 = crt_size / 2;
-	if ((pos == TOP_A || pos == BOT_A) && crt_size < 15)
-		*pivot_1 = crt_size;
-	if (pos == BOT_B && crt_size < 8)
-		*pivot_2 = crt_size / 2;
-}
+	t_stack	*stack;
+	int		max;
+	int		index;
 
-
-void	qchunks_set_positions(t_pos pos, t_qchunks *qchunks)
-{
-	if (pos == TOP_A)
+	stack = position_to_stack(data, chunk->position);
+	if (position_is_top(chunk->position))
+		index = stack->top;
+	else
+		index = stack->bottom;
+	max = stack->array[index];
+	while (chunk->size > 0)
 	{
-		qchunks->max.POSITION = BOT_A;
-		qchunks->mid.POSITION = TOP_B;
-		qchunks->min.POSITION = BOT_B;
+		if (max < stack->array[index])
+			max = stack->array[index];
+		if (position_is_top(chunk->position))
+			index--;
+		else
+			index++;
+		chunk->size--;
 	}
-	else if (pos == BOT_A)
-	{
-		qchunks->max.POSITION = TOP_A;
-		qchunks->mid.POSITION = TOP_B;
-		qchunks->min.POSITION = BOT_B;
-	}
-	else if (pos == TOP_B)
-	{
-		qchunks->max.POSITION = TOP_A;
-		qchunks->mid.POSITION = BOT_A;
-		qchunks->min.POSITION = BOT_B;
-	}
-	else if (pos == BOT_B)
-	{
-		qchunks->max.POSITION = TOP_A;
-		qchunks->mid.POSITION = BOT_A;
-		qchunks->min.POSITION = TOP_B;
-	}
-}
-
-int	chunk_get_max(t_chunk *chunk)
-{
-	int	max;
-	int	index;
-	
-	if (chunk->POSITION == TOP_A || chunk->POSITION == TOP_B)
-		return ;
+	return (max);
 }

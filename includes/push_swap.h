@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:01:51 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 18:28:17 by val              ###   ########.fr       */
+/*   Updated: 2025/02/14 00:29:33 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_data
 
 typedef struct s_chunk
 {
-	t_pos	POSITION;
+	t_pos	position;
 	int		size;
 }		t_chunk;
 
@@ -65,10 +65,10 @@ typedef struct s_qchunks
 	t_chunk	min;
 }		t_qchunks;
 
+void	free_data(t_data *data);
 /*Utils - utils.c*/
 
 int		add_instruction(t_data *data, char *instruction);
-void	free_data(t_data *data);
 void	check_atoi(int *check, int *number, const char *nptr);
 void	print_error(void);
 void	lst_print(void *content);
@@ -103,4 +103,12 @@ int		sort(t_data *data);
 void	sort_three_a(t_data *data);
 void	sort_fourfive_a(t_data *data);
 /***************/
+
+int		position_is_a(t_pos pos);
+int		position_is_top(t_pos pos);
+t_stack	*position_to_stack(t_data *data, t_pos pos);
+
+int	chunk_get(t_chunk *chunk, int n, t_data *data);
+int	chunk_get_max(t_chunk *chunk, t_data *data);
+
 #endif
