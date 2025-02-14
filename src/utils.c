@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:04:42 by val               #+#    #+#             */
-/*   Updated: 2025/02/14 17:00:33 by val              ###   ########.fr       */
+/*   Updated: 2025/02/14 17:31:54 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,26 @@ int	add_instruction(t_data *data, char *instruction)
 
 void	check_atoi(int *check, int *number, const char *nptr)
 {
-	int					index;
 	int					sign;
+	size_t				size;
 	long long			result;
 
 	*check = 1;
 	sign = 1;
-	index = 0;
-	if (nptr[index] == '-')
+	if (*nptr == '-')
 	{
 		sign *= -1;
-		index++;
+		nptr++;
 	}
+	size = ft_strlen(nptr);
+	if (size == 0 || (*nptr == '0' && size > 1))
+		*check = 0;
 	result = 0;
-	while (nptr[index])
+	while (*nptr)
 	{
-		if (!ft_isdigit(nptr[index]))
+		if (!ft_isdigit(*nptr))
 			*check = 0;
-		if (index > 0 && (nptr[index - 1] == '0'))
-			*check = 0;
-		result = result * 10 + (nptr[index] - '0');
-		index++;
+		result = result * 10 + (*nptr++ - '0');
 	}
 	if (result * sign > (long long) INT_MAX || result * sign < (long long) INT_MIN)
 		*check = 0;
