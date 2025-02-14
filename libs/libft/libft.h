@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 15:39:28 by vdurand           #+#    #+#             */
-/*   Updated: 2025/02/12 14:54:40 by val              ###   ########.fr       */
+/*   Updated: 2025/02/14 21:06:08 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ char	*get_next_line(int fd);
 char	*ft_itoa(int n);
 //
 
+void	ft_lstmakegap(t_list *gap_start, t_list *gap_end, void (*del)(void *));
 void	ft_striteri(char *s, void (*f)(size_t, char *));
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
