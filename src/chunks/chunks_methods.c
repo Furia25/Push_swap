@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chunks.c                                           :+:      :+:    :+:   */
+/*   chunks_methods.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:51:23 by vdurand           #+#    #+#             */
-/*   Updated: 2025/02/14 00:28:14 by val              ###   ########.fr       */
+/*   Updated: 2025/02/14 15:30:05 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,16 @@ int	chunk_get_max(t_chunk *chunk, t_data *data)
 	t_stack	*stack;
 	int		max;
 	int		index;
-
+	int		size;
+	
+	size = chunk->size;
 	stack = position_to_stack(data, chunk->position);
 	if (position_is_top(chunk->position))
 		index = stack->top;
 	else
 		index = stack->bottom;
 	max = stack->array[index];
-	while (chunk->size > 0)
+	while (size > 0)
 	{
 		if (max < stack->array[index])
 			max = stack->array[index];
@@ -55,7 +57,7 @@ int	chunk_get_max(t_chunk *chunk, t_data *data)
 			index--;
 		else
 			index++;
-		chunk->size--;
+		size--;
 	}
 	return (max);
 }

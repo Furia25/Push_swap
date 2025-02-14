@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:49:17 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 17:54:45 by val              ###   ########.fr       */
+/*   Updated: 2025/02/14 16:58:42 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ int	parse_argv(t_data *data, char **argv, size_t argc)
 	while (index > 0)
 	{
 		check_atoi(&check, &number, argv[index]);
-		if (!check)
+		if (!check || ft_strlen(argv[index]) <= 0 || \
+			(argv[index][0] == '-' && !ft_isdigit(argv[index][1])))
 			return (0);
 		stack_push(&data->stack_a, number);
 		j = data->stack_a.top - 1;
@@ -112,7 +113,7 @@ int	main(int argc, char **argv)
 		return (free_data(data), EXIT_SUCCESS);
 	if (!sort(data))
 		return (free_data(data), print_error(), EXIT_FAILURE);
-	stack_print(&data->stack_a);
+	//stack_print(&data->stack_a);
 	ft_lstiter(data->instructions->next, lst_print);
 	free_data(data);
 	return (EXIT_SUCCESS);
