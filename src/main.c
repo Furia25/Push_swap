@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:49:17 by val               #+#    #+#             */
-/*   Updated: 2025/02/15 01:26:19 by val              ###   ########.fr       */
+/*   Updated: 2025/02/15 02:42:22 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int	main(int argc, char **argv)
 		return (free_data(data), EXIT_SUCCESS);
 	if (!sort(data))
 		return (free_data(data), print_error(), EXIT_FAILURE);
-	instructions_clean(&data->instructions->next);
+	instructions_clean(&data->instructions);
 	ft_lstiter(data->instructions->next, lst_print);
 	free_data(data);
 	return (EXIT_SUCCESS);

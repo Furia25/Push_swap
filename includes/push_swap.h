@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:01:51 by val               #+#    #+#             */
-/*   Updated: 2025/02/15 01:25:30 by val              ###   ########.fr       */
+/*   Updated: 2025/02/15 02:58:22 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,21 @@
 
 # define ERROR_MESSAGE "Error\n"
 //
-# define PUSH_A		"pa"
-# define PUSH_B		"pb"
+# define PUSH_A			"pa"
+# define PUSH_B			"pb"
 //
-# define SWAP_A		"sa"
-# define SWAP_B		"sb"
-# define SWAP_AB	"ss"
+# define SWAP_A			"sa"
+# define SWAP_B			"sb"
+# define SWAP_AB		"ss"
 //
-# define ROTATE_A	"ra"
-# define ROTATE_B	"rb"
-# define ROTATE_AB	"rr"
+# define ROTATE_A		"ra"
+# define ROTATE_B		"rb"
+# define ROTATE_AB		"rr"
 //
-# define RROTATE_A	"rra"
-# define RROTATE_B	"rrb"
-# define RROTATE_AB	"rrr"
+# define RROTATE_A		"rra"
+# define RROTATE_B		"rrb"
+# define RROTATE_AB		"rrr"
+# define CLEAN_CONST	"DESTROY"
 
 typedef enum e_pos
 {
