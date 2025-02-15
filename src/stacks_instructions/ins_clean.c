@@ -6,13 +6,13 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 20:28:16 by val               #+#    #+#             */
-/*   Updated: 2025/02/15 03:48:46 by val              ###   ########.fr       */
+/*   Updated: 2025/02/15 13:26:55 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	cstr(char *s1, char *s2)
+int	cmpstr(char *s1, char *s2)
 {
 	return (ft_strcmp(s1, s2) == 0);
 }
@@ -36,8 +36,8 @@ static void	next_lsts(t_list **super_last, t_list **last, t_list **current)
 
 static int	check_pair(t_list *last, t_list *current, char *a, char *b)
 {
-	return ((cstr(last->content, a) && cstr(current->content, b)) || \
-		(cstr(last->content, b) && cstr(current->content, a)));
+	return ((cmpstr(last->content, a) && cmpstr(current->content, b)) || \
+		(cmpstr(last->content, b) && cmpstr(current->content, a)));
 }
 
 static void	clean_pair(t_list **s_last, t_list **last, t_list **actual, char *s)
@@ -53,7 +53,7 @@ static void	clean_pair(t_list **s_last, t_list **last, t_list **actual, char *s)
 		check_pair(*last, *actual, ROTATE_A, RROTATE_A) || \
 		check_pair(*last, *actual, ROTATE_B, RROTATE_B))
 		s = CLEAN_CONST;
-	if (s && cstr(s, CLEAN_CONST))
+	if (s && cmpstr(s, CLEAN_CONST))
 	{
 		(*s_last)->next = (*actual)->next;
 		ft_lstdelone(*last, NULL);

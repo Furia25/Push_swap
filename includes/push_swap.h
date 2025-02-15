@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:01:51 by val               #+#    #+#             */
-/*   Updated: 2025/02/15 12:56:35 by val              ###   ########.fr       */
+/*   Updated: 2025/02/15 13:37:05 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_qchunks
 }		t_qchunks;
 
 /*Utils - main_utils.c*/
+
 int		parse_argv(t_data *data, char **argv, size_t argc);
 t_data	*init_data(int capacity);
 void	free_data(t_data *data);
@@ -80,8 +81,12 @@ void	print_error(void);
 void	lst_print(void *content);
 /*************** */
 
+int		instruction_do(char *instru, t_data *data);
 /*Stacks Instructions - ins_clean.c*/
+
+int		cmpstr(char *s1, char *s2);
 void	instructions_clean(t_list **instructions);
+/***********************************/
 
 /*Stacks Instructions - ins_pushs_swaps.c*/
 

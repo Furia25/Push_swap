@@ -6,7 +6,7 @@
 #    By: val <val@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/13 23:20:17 by val               #+#    #+#              #
-#    Updated: 2025/02/15 13:10:05 by val              ###   ########.fr        #
+#    Updated: 2025/02/15 13:37:18 by val              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRC_COMMON_FILES = \
 	stacks_instructions/ins_pushs_swaps.c \
 	stacks_instructions/ins_reverse_rotate.c \
 	stacks_instructions/ins_rotate.c \
+	stacks_instructions/ins_utils.c \
 	positions_utils.c \
 	utils.c \
 	main_utils.c
