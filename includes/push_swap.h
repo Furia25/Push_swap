@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:01:51 by val               #+#    #+#             */
-/*   Updated: 2025/02/15 02:58:22 by val              ###   ########.fr       */
+/*   Updated: 2025/02/15 12:56:35 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,12 @@ typedef struct s_qchunks
 	t_chunk	min;
 }		t_qchunks;
 
+/*Utils - main_utils.c*/
+int		parse_argv(t_data *data, char **argv, size_t argc);
+t_data	*init_data(int capacity);
 void	free_data(t_data *data);
+/*********************/
+
 /*Utils - utils.c*/
 
 int		add_instruction(t_data *data, char *instruction);

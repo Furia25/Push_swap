@@ -6,7 +6,7 @@
 #    By: val <val@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/13 23:20:17 by val               #+#    #+#              #
-#    Updated: 2025/02/14 16:01:29 by val              ###   ########.fr        #
+#    Updated: 2025/02/15 13:01:28 by val              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ HIDDEN = \033[8m
 RESET = \033[0m
 
 NAME = push_swap
+NAME_BONUS = checker
 
 SRC_DIR = src
 MAIN_DIR = src_main
@@ -49,8 +50,34 @@ OBJ_DIR = obj
 INC_DIR = includes
 LIBS_DIR = libs
 
-SRC = $(shell find $(SRC_DIR) -type f -name "*.c")
-OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+#SRC = $(shell find $(SRC_DIR) -type f -mindepth 1 -name "*.c")
+SRC_COMMON_FILES = \
+	chunks/chunks_methods.c \
+	chunks/chunks_moves.c \
+	chunks/qsorts_methods.c \
+	sort/sort_chunks.c \
+	sort/sort_easy.c \
+	sort/sort.c \
+	stacks_instructions/ins_clean.c \
+	stacks_instructions/ins_pushs_swaps.c \
+	stacks_instructions/ins_reverse_rotate.c \
+	stacks_instructions/ins_rotate.c \
+	positions_utils.c \
+	utils.c \
+	main_utils.c
+
+SRC_CHECKER_FILES = \
+	checker/checker_main.c
+
+SRC_COMMON = $(addprefix $(SRC_DIR)/, $(SRC_COMMON_FILES))
+SRC_CHECKER = $(addprefix $(SRC_DIR)/, $(SRC_CHECKER_FILES))
+
+SRC_MAIN = $(SRC_COMMON) $(SRC_DIR)/main.c
+SRC_BONUS = $(SRC_COMMON) $(SRC_CHECKER)
+
+OBJ = $(SRC_MAIN:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJ_BONUS = $(SRC_BONUS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
 LIBS_DIRS = $(shell find $(LIBS_DIR) -mindepth 1 -type d)
 LIBS = $(foreach dir, $(LIBS_DIRS), $(dir)/$(notdir $(dir)).a)
 
@@ -62,6 +89,12 @@ INCLUDES = $(LDFLAGS) -I$(INC_DIR) $(addprefix -I, $(LIBS_DIRS))
 
 all: $(NAME)
 
+bonus : $(NAME_BONUS)
+
+$(NAME_BONUS) : $(OBJ_BONUS) $(LIBS)
+	@$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	@echo "$(BG_GREEN)>>> Program $(NAME_BONUS) compiled!$(RESET)"
+	
 $(NAME): $(OBJ) $(LIBS)
 	@$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	@echo "$(BG_GREEN)>>> Program $(NAME) compiled!$(RESET)"
@@ -111,7 +144,8 @@ clean:
 fclean: clean fcleanlibs
 	@echo "$(YELLOW)>>> Cleaning executable...$(RESET)"
 	@rm -f $(NAME) > /dev/null 2>&1
+	@rm -f $(NAME_BONUS) > /dev/null 2>&1
 
 re: fclean all
 
-.PHONY: all fcleanlibs clean fclean re compile_libs
+.PHONY: all fcleanlibs clean fclean re compile_libs bonus
