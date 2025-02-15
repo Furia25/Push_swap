@@ -6,7 +6,7 @@
 #    By: val <val@student.42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/13 23:20:17 by val               #+#    #+#              #
-#    Updated: 2025/02/15 13:01:28 by val              ###   ########.fr        #
+#    Updated: 2025/02/15 13:10:05 by val              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,9 +89,9 @@ INCLUDES = $(LDFLAGS) -I$(INC_DIR) $(addprefix -I, $(LIBS_DIRS))
 
 all: $(NAME)
 
-bonus : $(NAME_BONUS)
+bonus: $(NAME_BONUS)
 
-$(NAME_BONUS) : $(OBJ_BONUS) $(LIBS)
+$(NAME_BONUS): $(OBJ_BONUS) $(LIBS)
 	@$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	@echo "$(BG_GREEN)>>> Program $(NAME_BONUS) compiled!$(RESET)"
 	
@@ -148,4 +148,8 @@ fclean: clean fcleanlibs
 
 re: fclean all
 
-.PHONY: all fcleanlibs clean fclean re compile_libs bonus
+debug:
+	@echo $(OBJ_BONUS)
+	@echo "\n"
+	@echo $(SRC_BONUS)
+.PHONY: all fcleanlibs clean fclean re compile_libs bonus debug
