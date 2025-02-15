@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:27:50 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 17:45:57 by val              ###   ########.fr       */
+/*   Updated: 2025/02/15 01:17:32 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,16 @@ int	stack_push(t_stack *stack, int value)
 	return (1);
 }
 
-int stack_swap(t_stack *stack)
+int	stack_swap(t_stack *stack)
 {
-    int temp;
+	int	temp;
 
-    if (stack->top < 1)
-        return (0);
-    temp = stack->array[stack->top];
-    stack->array[stack->top] = stack->array[stack->top - 1];
-    stack->array[stack->top - 1] = temp;
-    return (1);
+	if (stack->top < 1)
+		return (0);
+	temp = stack->array[stack->top];
+	stack->array[stack->top] = stack->array[stack->top - 1];
+	stack->array[stack->top - 1] = temp;
+	return (1);
 }
 
 int	stack_rotate(t_stack *stack)

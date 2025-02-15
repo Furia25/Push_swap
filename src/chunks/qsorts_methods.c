@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 00:22:11 by val               #+#    #+#             */
-/*   Updated: 2025/02/14 15:29:24 by val              ###   ########.fr       */
+/*   Updated: 2025/02/15 01:20:04 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	qsort_pivots(t_pos pos, int size, int *pivot_1, int *pivot_2)
 	if (pos == BOT_B && size < 8)
 		*pivot_2 = size / 2;
 }
-
 
 void	qchunks_set_positions(t_pos pos, t_qchunks *qchunks)
 {
@@ -61,7 +60,6 @@ void	qchunk_from_split(t_chunk *chunk, t_qchunks *qchunks, t_data *data)
 	int	max_value;
 	int	next_value;
 
-	
 	qchunks->min.size = 0;
 	qchunks->mid.size = 0;
 	qchunks->max.size = 0;
@@ -72,13 +70,13 @@ void	qchunk_from_split(t_chunk *chunk, t_qchunks *qchunks, t_data *data)
 	{
 		next_value = chunk_get(chunk, 1, data);
 		if (next_value > max_value - pivot2)
-			qchunks->max.size += \
-				move_from_position(chunk->position, qchunks->max.position, data);
+			qchunks->max.size += move_from_position(\
+				chunk->position, qchunks->max.position, data);
 		else if (next_value > max_value - pivot1)
-			qchunks->mid.size += \
-				move_from_position(chunk->position, qchunks->mid.position, data);
+			qchunks->mid.size += move_from_position(\
+				chunk->position, qchunks->mid.position, data);
 		else
-			qchunks->min.size += \
-				move_from_position(chunk->position, qchunks->min.position, data);
+			qchunks->min.size += move_from_position(\
+				chunk->position, qchunks->min.position, data);
 	}
 }

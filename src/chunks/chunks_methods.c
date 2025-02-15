@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:51:23 by vdurand           #+#    #+#             */
-/*   Updated: 2025/02/14 15:30:05 by val              ###   ########.fr       */
+/*   Updated: 2025/02/15 01:19:01 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	chunk_get(t_chunk *chunk, int n, t_data *data)
 	t_stack	*stack;
 	int		index;
 	int		direction;
-	
+
 	if (n > chunk->size && chunk->size > 1)
 		return (chunk_get(chunk, n - chunk->size, data));
 	direction = position_is_top(chunk->position);
@@ -41,7 +41,7 @@ int	chunk_get_max(t_chunk *chunk, t_data *data)
 	int		max;
 	int		index;
 	int		size;
-	
+
 	size = chunk->size;
 	stack = position_to_stack(data, chunk->position);
 	if (position_is_top(chunk->position))

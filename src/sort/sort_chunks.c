@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:39:40 by vdurand           #+#    #+#             */
-/*   Updated: 2025/02/14 16:18:51 by val              ###   ########.fr       */
+/*   Updated: 2025/02/15 01:18:31 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	sort_two(t_data *data, t_chunk *to_sort)
 		move_from_position(to_sort->position, TOP_A, data);
 		move_from_position(to_sort->position, TOP_A, data);
 	}
-	if (data->stack_a.array[data->stack_a.top] > data->stack_a.array[data->stack_a.top - 1])
+	if (data->stack_a.array[data->stack_a.top] > \
+			data->stack_a.array[data->stack_a.top - 1])
 		swap_a(data);
 	to_sort->size -= 2;
 }

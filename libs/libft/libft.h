@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 15:39:28 by vdurand           #+#    #+#             */
-/*   Updated: 2025/02/14 21:06:08 by val              ###   ########.fr       */
+/*   Updated: 2025/02/15 01:20:44 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ size_t	ft_strlcpy(char *dest, char *src, size_t size);
 //
 int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strend(char *str, char *suffix);
 int		count_words(const char *str, char c);
 int		ft_atoi(const char *nptr);

@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:01:51 by val               #+#    #+#             */
-/*   Updated: 2025/02/14 15:21:18 by val              ###   ########.fr       */
+/*   Updated: 2025/02/15 01:25:30 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ void	print_error(void);
 void	lst_print(void *content);
 /*************** */
 
+/*Stacks Instructions - ins_clean.c*/
+void	instructions_clean(t_list **instructions);
+
 /*Stacks Instructions - ins_pushs_swaps.c*/
 
 int		push_a(t_data *data);
@@ -111,10 +114,10 @@ int		position_is_a(t_pos pos);
 int		position_is_top(t_pos pos);
 t_stack	*position_to_stack(t_data *data, t_pos pos);
 
-int	chunk_get(t_chunk *chunk, int n, t_data *data);
-int	chunk_get_max(t_chunk *chunk, t_data *data);
+int		chunk_get(t_chunk *chunk, int n, t_data *data);
+int		chunk_get_max(t_chunk *chunk, t_data *data);
 void	qchunk_from_split(t_chunk *chunk, t_qchunks *qchunks, t_data *data);
 
-int	move_from_position(t_pos from, t_pos dest, t_data *data);
+int		move_from_position(t_pos from, t_pos dest, t_data *data);
 
 #endif

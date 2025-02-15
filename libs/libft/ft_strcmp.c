@@ -1,34 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmakegap.c                                    :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/14 21:05:39 by val               #+#    #+#             */
-/*   Updated: 2025/02/15 01:16:39 by val              ###   ########.fr       */
+/*   Created: 2025/02/15 01:15:47 by val               #+#    #+#             */
+/*   Updated: 2025/02/15 01:16:12 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstmakegap(t_list *gap_start, t_list *gap_end, void (*del)(void *))
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	t_list	*current;
-	t_list	*temp;
-
-	if (!gap_start || !gap_end)
-		return ;
-	current = gap_start->next;
-	while (current && current != gap_end)
+	while (*s1 && *s2 && *s1 == *s2)
 	{
-		temp = current->next;
-		ft_lstdelone(current, del);
-		current = temp;
+		s1++;
+		s2++;
 	}
-	if (current == gap_end)
-	{
-		gap_start->next = gap_end->next;
-		ft_lstdelone(gap_end, del);
-	}
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
 }

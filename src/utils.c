@@ -6,7 +6,7 @@
 /*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 00:04:42 by val               #+#    #+#             */
-/*   Updated: 2025/02/14 17:31:54 by val              ###   ########.fr       */
+/*   Updated: 2025/02/15 01:19:33 by val              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	check_atoi(int *check, int *number, const char *nptr)
 			*check = 0;
 		result = result * 10 + (*nptr++ - '0');
 	}
-	if (result * sign > (long long) INT_MAX || result * sign < (long long) INT_MIN)
+	if (result * sign > (long long) INT_MAX || \
+		result * sign < (long long) INT_MIN)
 		*check = 0;
 	*number = result * sign;
 }
