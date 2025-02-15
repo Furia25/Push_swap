@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ins_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 13:25:30 by val               #+#    #+#             */
-/*   Updated: 2025/02/15 13:41:29 by val              ###   ########.fr       */
+/*   Updated: 2025/02/15 16:48:58 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	instruction_do(char *instru, t_data *data)
 	size = ft_strlen(instru);
 	if (size < 3)
 		return (0);
-	instru[size - 1] = '\0';
+	if (instru[size - 1] == '\n')
+		instru[size - 1] = '\0';
 	result = checks(instru, data);
-	ft_printf("%d", result);
 	return (result);
 }
