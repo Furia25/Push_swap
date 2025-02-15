@@ -6,7 +6,7 @@
 /*   By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 12:53:12 by val               #+#    #+#             */
-/*   Updated: 2025/02/15 16:54:21 by vdurand          ###   ########.fr       */
+/*   Updated: 2025/02/15 16:57:23 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,9 @@ int	main(int argc, char **argv)
 		return (free_data(data), print_error(), EXIT_FAILURE);
 	if (!parse_argv(data, argv, argc))
 		return (free_data(data), print_error(), EXIT_FAILURE);
-	ft_printf("test\n");
 	result = read_stdin_and_perform(data);
 	if (result == -1)
-		return (ft_printf("test\n"), print_error(), free_data(data), EXIT_FAILURE);
+		return (print_error(), free_data(data), EXIT_FAILURE);
 	if (result == 0)
 		return (ft_printf("KO\n"), free_data(data), EXIT_FAILURE);
 	ft_printf("OK\n");
