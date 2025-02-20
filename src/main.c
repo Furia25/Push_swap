@@ -6,7 +6,7 @@
 /*   By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 23:49:17 by val               #+#    #+#             */
-/*   Updated: 2025/02/15 16:44:32 by vdurand          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:21:10 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	if (argc < 2)
-		return (print_error(), EXIT_FAILURE);
+		return (EXIT_SUCCESS);
 	data = init_data(argc - 1);
 	if (!data)
-		return (free_data(data), print_error(), EXIT_FAILURE);
+		return (print_error(), EXIT_FAILURE);
 	if (!parse_argv(data, argv, argc))
 		return (free_data(data), print_error(), EXIT_FAILURE);
 	data->write_mode = TRUE;

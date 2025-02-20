@@ -6,7 +6,7 @@
 /*   By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 12:53:12 by val               #+#    #+#             */
-/*   Updated: 2025/02/20 12:52:12 by vdurand          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:23:23 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	read_stdin_and_perform(t_data *data)
 		free(heredoc);
 		heredoc = get_next_line(STDIN_FILENO);
 	}
-	return (stack_is_sorted(&data->stack_a));
+	return (stack_is_sorted(&data->stack_a) && data->stack_b.top == -1);
 }
 
 int	main(int argc, char **argv)
@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 	int		result;
 
 	if (argc < 2)
-		return (print_error(), EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	data = init_data(argc - 1);
 	if (!data)
 		return (print_error(), EXIT_FAILURE);

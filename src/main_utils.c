@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 12:55:03 by val               #+#    #+#             */
-/*   Updated: 2025/02/15 12:55:36 by val              ###   ########.fr       */
+/*   Updated: 2025/02/20 18:21:51 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,19 @@ t_data	*init_data(int capacity)
 	data->write_mode = TRUE;
 	data->instructions = ft_lstnew(NULL);
 	if (!data->instructions)
+	{
+		free_data(data);
 		return (NULL);
+	}
 	if (!stack_init(&data->stack_a, capacity))
+	{
+		free_data(data);
 		return (NULL);
+	}
 	if (!stack_init(&data->stack_b, capacity))
+	{
+		free_data(data);
 		return (NULL);
+	}
 	return (data);
 }
