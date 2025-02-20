@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: val <val@student.42.fr>                    +#+  +:+       +#+         #
+#    By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/13 23:20:17 by val               #+#    #+#              #
-#    Updated: 2025/02/15 13:37:18 by val              ###   ########.fr        #
+#    Updated: 2025/02/20 13:08:59 by vdurand          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,22 @@ REVERSE = \033[7m
 HIDDEN = \033[8m
 
 RESET = \033[0m
+
+VERBOSE = 0
+
+ifeq ($(VERBOSE),1)
+    SILENT =
+else
+    SILENT = @
+endif
+
+ifeq ($(VERBOSE),1)
+    DUMP_OUT =
+else
+    DUMP_OUT = > /dev/null 2>&1
+endif
+
+##################
 
 NAME = push_swap
 NAME_BONUS = checker
@@ -88,26 +104,27 @@ LIBS_NO_LIB =  $(patsubst lib%, %, $(patsubst %.a, %, $(notdir $(LIBS))))
 LDFLAGS = $(addprefix -L, $(LIBS_DIRS)) $(addprefix -l, $(LIBS_NO_LIB))
 INCLUDES = $(LDFLAGS) -I$(INC_DIR) $(addprefix -I, $(LIBS_DIRS))
 
+.PHONY: all
 all: $(NAME)
 
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJ_BONUS) $(LIBS)
-	@$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	$(SILENT) $(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	@echo "$(BG_GREEN)>>> Program $(NAME_BONUS) compiled!$(RESET)"
 	
 $(NAME): $(OBJ) $(LIBS)
-	@$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
+	$(SILENT) $(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 	@echo "$(BG_GREEN)>>> Program $(NAME) compiled!$(RESET)"
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c Makefile $(INC_DIR)/*.h
-	@mkdir -p $(dir $@)
+	$(SILENT) mkdir -p $(dir $@)
 	@echo "$(BLUE)>>> Compiling $<...$(RESET)"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
+	$(SILENT) $(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(LIBS): %.a:
-	@echo "$(MAGENTA)>>> Compiling library $(notdir $@)...$(RESET)"
-	@$(MAKE) -C $(dir $@) > /dev/null 2> make_errors.log; \
+	$(SILENT) echo "$(MAGENTA)>>> Compiling library $(notdir $@)...$(RESET)"
+	$(SILENT) $(MAKE) -C $(dir $@) > /dev/null 2> make_errors.log; \
 	if [ $$? -ne 0 ]; then \
 		echo "$(RED)>>> Error while compiling $(notdir $@):$(RESET)"; \
 		cat make_errors.log; \
@@ -116,7 +133,7 @@ $(LIBS): %.a:
 		exit 1; \
 	fi; \
 	rm -f make_errors.log
-	@if $(MAKE) -C $(dir $@) -n bonus > /dev/null 2>&1; then \
+	$(SILENT) if $(MAKE) -C $(dir $@) -n bonus $(DUMP_OUT); then \
 		echo "$(DIM)$(MAGENTA)>>> Bonus rule exists, compiling with bonus...$(RESET)"; \
 		$(MAKE) -C $(dir $@) bonus > /dev/null 2> make_errors.log; \
 		if [ $$? -ne 0 ]; then \
@@ -131,26 +148,22 @@ $(LIBS): %.a:
 	@echo "$(BG_BLUE)$(GREEN)>>> Compilation of $(notdir $@) completed!$(RESET)"
 
 fcleanlibs:
-	@for dir in $(LIBS_DIRS); do \
+	$(SILENT) for dir in $(LIBS_DIRS); do \
 		if [ -f $$dir/Makefile ]; then \
-			$(MAKE) -C $$dir fclean > /dev/null 2>&1; \
+			$(MAKE) -C $$dir fclean $(DUMP_OUT); \
 			echo "$(GREEN)>>> Cleaned all in $$dir$(RESET)"; \
 		fi \
 	done
 
 clean:
 	@echo "$(YELLOW)>>> Cleaning objects$(RESET)"
-	@rm -rf $(OBJ_DIR) > /dev/null 2>&1
+	$(SILENT) rm -rf $(OBJ_DIR) $(DUMP_OUT)
 
 fclean: clean fcleanlibs
 	@echo "$(YELLOW)>>> Cleaning executable...$(RESET)"
-	@rm -f $(NAME) > /dev/null 2>&1
-	@rm -f $(NAME_BONUS) > /dev/null 2>&1
+	$(SILENT) rm -f $(NAME) $(DUMP_OUT)
+	$(SILENT) rm -f $(NAME_BONUS) $(DUMP_OUT)
 
 re: fclean all
 
-debug:
-	@echo $(OBJ_BONUS)
-	@echo "\n"
-	@echo $(SRC_BONUS)
-.PHONY: all fcleanlibs clean fclean re compile_libs bonus debug
+.PHONY: fcleanlibs clean fclean re compile_libs bonus
