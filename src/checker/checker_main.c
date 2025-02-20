@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 	int		result;
-	
+
 	if (argc < 2)
 		return (print_error(), EXIT_FAILURE);
 	data = init_data(argc - 1);
