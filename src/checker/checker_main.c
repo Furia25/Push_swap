@@ -6,7 +6,7 @@
 /*   By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 12:53:12 by val               #+#    #+#             */
-/*   Updated: 2025/02/15 16:57:23 by vdurand          ###   ########.fr       */
+/*   Updated: 2025/02/20 12:52:12 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@ static int	read_stdin_and_perform(t_data *data)
 {
 	char	*heredoc;
 
-	while (1)
+	heredoc = get_next_line(STDIN_FILENO);
+	while (heredoc)
 	{
-		heredoc = get_next_line(STDIN_FILENO);
-		if (!heredoc)
-			break ;
 		if (!instruction_do(heredoc, data))
-			return (free(heredoc), 0);
+			return (free(heredoc), -1);
 		free(heredoc);
+		heredoc = get_next_line(STDIN_FILENO);
 	}
 	return (stack_is_sorted(&data->stack_a));
 }
@@ -38,7 +37,7 @@ int	main(int argc, char **argv)
 		return (print_error(), EXIT_FAILURE);
 	data = init_data(argc - 1);
 	if (!data)
-		return (free_data(data), print_error(), EXIT_FAILURE);
+		return (print_error(), EXIT_FAILURE);
 	if (!parse_argv(data, argv, argc))
 		return (free_data(data), print_error(), EXIT_FAILURE);
 	result = read_stdin_and_perform(data);

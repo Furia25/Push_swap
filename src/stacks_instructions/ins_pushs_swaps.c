@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ins_pushs_swaps.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 23:37:26 by val               #+#    #+#             */
-/*   Updated: 2025/02/12 15:30:48 by val              ###   ########.fr       */
+/*   Updated: 2025/02/20 12:50:16 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	push_a(t_data *data)
 	add_instruction(data, PUSH_A);
 	temp = stack_pop(&data->stack_b);
 	if (!temp)
-		return (0);
+		return (1);
 	stack_push(&data->stack_a, *temp);
 	return (1);
 }
@@ -31,7 +31,7 @@ int	push_b(t_data *data)
 	add_instruction(data, PUSH_B);
 	temp = stack_pop(&data->stack_a);
 	if (!temp)
-		return (0);
+		return (1);
 	stack_push(&data->stack_b, *temp);
 	return (1);
 }

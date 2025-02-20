@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_methods.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:27:50 by val               #+#    #+#             */
-/*   Updated: 2025/02/15 01:17:32 by val              ###   ########.fr       */
+/*   Updated: 2025/02/20 12:48:21 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	stack_push(t_stack *stack, int value)
 {
-	if (stack->top != -1 && (size_t) stack->top == stack->size - 1)
+	if ((size_t) stack->top == stack->size - 1)
 		return (0);
 	stack->top++;
 	stack->array[stack->top] = value;
