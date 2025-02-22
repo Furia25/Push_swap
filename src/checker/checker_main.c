@@ -6,7 +6,7 @@
 /*   By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 12:53:12 by val               #+#    #+#             */
-/*   Updated: 2025/02/20 18:23:23 by vdurand          ###   ########.fr       */
+/*   Updated: 2025/02/22 15:25:57 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 	int		result;
 
 	if (argc < 2)
-		return (EXIT_FAILURE);
+		return (EXIT_SUCCESS);
 	data = init_data(argc - 1);
 	if (!data)
 		return (print_error(), EXIT_FAILURE);
