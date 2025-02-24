@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: val <val@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 16:01:51 by val               #+#    #+#             */
-/*   Updated: 2025/02/15 13:37:05 by val              ###   ########.fr       */
+/*   Updated: 2025/02/24 17:10:55 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int		rotate_ab(t_data *data);
 int		sort(t_data *data);
 void	sort_three_a(t_data *data);
 void	sort_fourfive_a(t_data *data);
+void	sort_small(t_data *data);
 /***************/
 
 void	sort_chunk_init(t_data *data);

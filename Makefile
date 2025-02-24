@@ -6,7 +6,7 @@
 #    By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/13 23:20:17 by val               #+#    #+#              #
-#    Updated: 2025/02/20 13:08:59 by vdurand          ###   ########.fr        #
+#    Updated: 2025/02/24 15:42:04 by vdurand          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,6 @@ OBJ_DIR = obj
 INC_DIR = includes
 LIBS_DIR = libs
 
-#SRC = $(shell find $(SRC_DIR) -type f -mindepth 1 -name "*.c")
 SRC_COMMON_FILES = \
 	chunks/chunks_methods.c \
 	chunks/chunks_moves.c \
@@ -107,6 +106,7 @@ INCLUDES = $(LDFLAGS) -I$(INC_DIR) $(addprefix -I, $(LIBS_DIRS))
 .PHONY: all
 all: $(NAME)
 
+.PHONY: bonus
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJ_BONUS) $(LIBS)
@@ -147,6 +147,7 @@ $(LIBS): %.a:
 	fi
 	@echo "$(BG_BLUE)$(GREEN)>>> Compilation of $(notdir $@) completed!$(RESET)"
 
+.PHONY: fcleanlibs
 fcleanlibs:
 	$(SILENT) for dir in $(LIBS_DIRS); do \
 		if [ -f $$dir/Makefile ]; then \
@@ -155,15 +156,16 @@ fcleanlibs:
 		fi \
 	done
 
+.PHONY: clean
 clean:
 	@echo "$(YELLOW)>>> Cleaning objects$(RESET)"
 	$(SILENT) rm -rf $(OBJ_DIR) $(DUMP_OUT)
 
+.PHONY: fclean
 fclean: clean fcleanlibs
 	@echo "$(YELLOW)>>> Cleaning executable...$(RESET)"
 	$(SILENT) rm -f $(NAME) $(DUMP_OUT)
 	$(SILENT) rm -f $(NAME_BONUS) $(DUMP_OUT)
 
+.PHONY: re
 re: fclean all
-
-.PHONY: fcleanlibs clean fclean re compile_libs bonus
