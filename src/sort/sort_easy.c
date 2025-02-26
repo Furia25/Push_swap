@@ -6,7 +6,7 @@
 /*   By: vdurand <vdurand@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 17:16:17 by val               #+#    #+#             */
-/*   Updated: 2025/02/24 17:33:52 by vdurand          ###   ########.fr       */
+/*   Updated: 2025/02/26 18:08:35 by vdurand          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,14 @@ void	sort_small(t_data *data)
 	int	value_index;
 
 	min = 1;
-	while (data->stack_a.top > 2)
+	while (data->stack_a.top > 2 || data->stack_a.size == 4)
 	{
 		value_index = find_value(data, min);
+		if (value_index == -1)
+			break ;
 		while (data->stack_a.array[data->stack_a.top] != min)
 		{
-			if (value_index >= data->stack_a.top / 2)
+			if (value_index > data->stack_a.top / 2)
 				rotate_a(data);
 			else
 				rrotate_a(data);
